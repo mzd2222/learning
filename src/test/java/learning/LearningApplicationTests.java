@@ -20,6 +20,9 @@ class LearningApplicationTests {
     @Autowired
     RedisTemplate redisTemplate;  //操作键值对，都是object
 
+    @Autowired
+    RedisTemplate<Object, Employee> EmpredisTemplate;
+
     /**
      * String,List,Set集合,Hash散列,ZSet有序集合
      * Redis常见五大数据类型
@@ -38,9 +41,15 @@ class LearningApplicationTests {
 //        stringRedisTemplate.opsForValue().append("msg","hello world");
 //        String s = stringRedisTemplate.opsForValue().get("msg");
 //        System.out.println(s);
-        stringRedisTemplate.opsForList().leftPush("myList", "1");
-        stringRedisTemplate.opsForList().leftPush("myList", "2");
-        stringRedisTemplate.opsForList().leftPush("myList", "3");
+//        stringRedisTemplate.opsForList().leftPush("myList", "1");
+//        stringRedisTemplate.opsForList().leftPush("myList", "2");
+//        stringRedisTemplate.opsForList().leftPush("myList", "3");
+        //保存对象
+        //如果保存对象，使用jdk序列化工具序列化
+        EmpredisTemplate.opsForValue().set("emp", employeeMapper.getEmployeeById(1));
+        //若想将数据转化为json，
+        //1 手动转
+        //2 使用自带序列化规则
     }
 
     @Test

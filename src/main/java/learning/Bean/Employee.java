@@ -1,6 +1,10 @@
 package learning.Bean;
 
-public class Employee {
+import java.io.Serializable;
+
+
+//Serializable序列化后才能在redis保存 添加  implements Serializable
+public class Employee implements Serializable {
 
     private Integer id;
     private String lastName;
