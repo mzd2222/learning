@@ -4,6 +4,10 @@ package learning.Service;
 import learning.Bean.Employee;
 import learning.Mapper.EmployeeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizer;
+import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizers;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.*;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +17,7 @@ public class EmployeeService {
 
     @Autowired
     EmployeeMapper employeeMapper;
+
 
     /**
      * /@Cacheable将方法的运行结果进行缓存，再要相同的数据，直接从缓存中获取，不用从数据库中取；
@@ -44,13 +49,15 @@ public class EmployeeService {
      * @param id
      * @return
      */
+//注解方式使用缓存
+    ///
 
-    @Cacheable(cacheNames = {"emp"})  //或者value
-    public Employee getEmp(Integer id) {
-        System.out.println("查询" + id + "员工");
-        Employee emp = employeeMapper.getEmployeeById(id);
-        return emp;
-    }
+//    @Cacheable(cacheNames = {"emp"})  //或者value
+//    public Employee getEmp(Integer id) {
+//        System.out.println("查询" + id + "员工");
+//        Employee emp = employeeMapper.getEmployeeById(id);
+//        return emp;
+//    }
 
 
     /**
@@ -96,6 +103,18 @@ public class EmployeeService {
     public Employee getEmpBylastName(String lastName) {
         return employeeMapper.getEmpBylastName(lastName);
     }
+
+
+    //编码的方式使用缓存
+
+//    public Employee getEmp(Integer id) {
+//        System.out.println("查询" + id + "员工");
+//        Employee emp = employeeMapper.getEmployeeById(id);
+//
+////        Cache emp1失败
+//
+//        return emp;
+//    }
 
 }
 

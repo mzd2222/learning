@@ -14,7 +14,7 @@ import java.rmi.UnexpectedException;
 //自定义一个序列化器，将复杂数据序列化后存入redis
 @Configuration
 public class MyRedisConfig {
-
+    //复杂类型直接存入redis时，转为json
     @Bean
     public RedisTemplate<Object, Employee> EmpredisTemplate(
             RedisConnectionFactory redisConnectionFactory) throws UnexpectedException {
